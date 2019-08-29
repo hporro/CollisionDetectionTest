@@ -29,6 +29,14 @@ class SimpleCollisionDetector implements CollisionDetector{
   void draw(){};
 }
 
+class NullCollisionDetector implements CollisionDetector{
+  NullCollisionDetector(){}
+  Particle[][] detectCollisions(){
+    return new Particle[0][2];
+  }
+  void draw(){};
+}
+
 class GridCell{
   ArrayList<Particle> p;
   int x,y;
@@ -83,11 +91,10 @@ class GridCollisionDetector implements CollisionDetector {
     }
     for(Particle a: p){
       if(a.pos.x < width && a.pos.x >0 && a.pos.y<height && a.pos.y>0)
-        gcs[floor(a.pos.y/gridCellSize)][floor(a.pos.x/gridCellSize)].add(a);
+        gcs[int(a.pos.y/gridCellSize)][int(a.pos.x/gridCellSize)].add(a);
     }
     int[] dx = {-1,0,1,1,1,0,-1,-1};
     int[] dy = {1,1,1,0,-1,-1,-1,0};
-    int numCollisions = 0;
     
     ArrayList<Particle[]> res = new ArrayList<Particle[]>();
     
@@ -95,7 +102,7 @@ class GridCollisionDetector implements CollisionDetector {
       for(int j=0;j*gridCellSize<width;j+=2){
         ArrayList<Particle> toCollide = gcs[i][j].p;
         for(int k=0;k<8;k++){
-          if(i+dx[k]>=0 && (i+dx[k])*gridCellSize<height && j+dy[k]>=0 && j+dy[k]<height){
+          if(i+dx[k]>=0 && (i+dx[k])*gridCellSize<width && j+dy[k]>=0 && (j+dy[k])*gridCellSize<height){
             toCollide.addAll(gcs[i+dx[k]][j+dy[k]].p);
           }
         }
@@ -126,5 +133,22 @@ class GridCollisionDetector implements CollisionDetector {
     for(int i=0;i*gridCellSize<width;i++){
       line(i*gridCellSize,0,i*gridCellSize,height);
     }
+  }
+}
+
+class DelanuayCollisionDetector implements CollisionDetector{
+  Particle[] p;
+  DelanuayCollisionDetector(Particle[] p){
+    this.p = p;
+  }
+  void update(){
+    
+  }
+  Particle[][] detectCollisions(){
+    update();
+    return new Particle[0][0];
+  }
+  void draw(){
+    
   }
 }

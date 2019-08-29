@@ -44,11 +44,11 @@ class Particle{
     circle(pos.x,pos.y,2*r);
   }
   Particle(){
-    pos.x = 100;
-    pos.y = 10;
+    pos.x = random(width);
+    pos.y = random(height);
     r = 5;
-    v.x = random(4);
-    v.y = random(4);
+    v.x = random(2);
+    v.y = random(2);
     m = 1;
   }
   boolean collidesWith(Particle p){
