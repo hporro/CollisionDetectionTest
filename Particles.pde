@@ -12,6 +12,16 @@ class ParticleRandom extends Particle{
   }
 }
 
+class StillParticle extends Particle{
+  void move(){}
+  boolean collidesWith(Particle p){return false;}
+  StillParticle(){super();}
+  StillParticle(float x, float y){
+    super(x,y);
+  }
+  void draw(){}
+}
+
 class Particle{
   PVector pos = new PVector(0,0);
   PVector v = new PVector(0,0);
@@ -46,9 +56,17 @@ class Particle{
   Particle(){
     pos.x = random(width);
     pos.y = random(height);
-    r = 5;
-    v.x = random(2);
-    v.y = random(2);
+    r = 20;
+    v.x = random(1);
+    v.y = random(1);
+    m = 1;
+  }
+  Particle(float x, float y){
+    pos.x = x;
+    pos.y = y;
+    r = 20;
+    v.x = random(1);
+    v.y = random(1);
     m = 1;
   }
   boolean collidesWith(Particle p){
@@ -57,4 +75,6 @@ class Particle{
     }
     return false;
   }
+  float getX(){return pos.x;}
+  float getY(){return pos.y;}
 }

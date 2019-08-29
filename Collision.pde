@@ -1,6 +1,7 @@
 interface CollisionDetector{
   Particle[][] detectCollisions();
   void draw();
+  void update();
 }
 
 class SimpleCollisionDetector implements CollisionDetector{
@@ -26,6 +27,7 @@ class SimpleCollisionDetector implements CollisionDetector{
     }
     return res;
   }
+  void update(){};
   void draw(){};
 }
 
@@ -34,6 +36,7 @@ class NullCollisionDetector implements CollisionDetector{
   Particle[][] detectCollisions(){
     return new Particle[0][2];
   }
+  void update(){};
   void draw(){};
 }
 
@@ -124,7 +127,8 @@ class GridCollisionDetector implements CollisionDetector {
     }
     return a;
     //return super.detectCollisions();
-  }
+    }
+  void update(){};
   void draw(){
     stroke(40);
     for(int i=0;i*gridCellSize<height;i++){
@@ -133,22 +137,5 @@ class GridCollisionDetector implements CollisionDetector {
     for(int i=0;i*gridCellSize<width;i++){
       line(i*gridCellSize,0,i*gridCellSize,height);
     }
-  }
-}
-
-class DelanuayCollisionDetector implements CollisionDetector{
-  Particle[] p;
-  DelanuayCollisionDetector(Particle[] p){
-    this.p = p;
-  }
-  void update(){
-    
-  }
-  Particle[][] detectCollisions(){
-    update();
-    return new Particle[0][0];
-  }
-  void draw(){
-    
   }
 }
