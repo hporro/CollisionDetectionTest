@@ -15,11 +15,17 @@ class ParticleRandom extends Particle{
 class StillParticle extends Particle{
   void move(){}
   boolean collidesWith(Particle p){return false;}
-  StillParticle(){super();}
+  StillParticle(){
+    super();
+    this.r = 5;
+  }
   StillParticle(float x, float y){
     super(x,y);
+    this.r = 10;
   }
-  void draw(){}
+  void draw(){
+    circle(pos.x,pos.y,2*r);
+  }
 }
 
 class Particle{
@@ -54,9 +60,9 @@ class Particle{
     circle(pos.x,pos.y,2*r);
   }
   Particle(){
-    pos.x = random(width);
-    pos.y = random(height);
     r = 20;
+    pos.x = random(r,width-r);
+    pos.y = random(r,height-r);
     v.x = random(1);
     v.y = random(1);
     m = 1;
@@ -65,8 +71,8 @@ class Particle{
     pos.x = x;
     pos.y = y;
     r = 20;
-    v.x = random(1);
-    v.y = random(1);
+    v.x = random(2);
+    v.y = random(2);
     m = 1;
   }
   boolean collidesWith(Particle p){

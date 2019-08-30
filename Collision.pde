@@ -2,11 +2,15 @@ interface CollisionDetector{
   Particle[][] detectCollisions();
   void draw();
   void update();
+  void reset(Particle[] p);
 }
 
 class SimpleCollisionDetector implements CollisionDetector{
   Particle p[];
   SimpleCollisionDetector(Particle p[]){this.p = p;}
+  void reset(Particle[] p){
+    this.p = p;
+  }
   Particle[][] detectCollisions(){
     int numCollisions = 0;
     for(int i=0;i<p.length;i++){
@@ -33,6 +37,7 @@ class SimpleCollisionDetector implements CollisionDetector{
 
 class NullCollisionDetector implements CollisionDetector{
   NullCollisionDetector(){}
+  void reset(Particle[] p){}
   Particle[][] detectCollisions(){
     return new Particle[0][2];
   }
@@ -76,6 +81,15 @@ class GridCollisionDetector implements CollisionDetector {
   Particle p[];
   int gridCellSize;
   GridCell gcs[][];
+  void reset(Particle[] p){
+    this.p = p;
+    gcs = new GridCell[height/gridCellSize][width/gridCellSize];
+    for(int i=0;i*gridCellSize<height;i++){
+      for(int j=0;j*gridCellSize<width;j++){
+        gcs[i][j] = new GridCell(i,j,gridCellSize);
+      }
+    }
+  }
   GridCollisionDetector(Particle p[], int gridCellSize){
     this.p = p;
     this.gridCellSize = gridCellSize;

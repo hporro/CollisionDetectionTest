@@ -1,5 +1,5 @@
 Particle c[];
-int numParticles = 0;
+int numParticles = 10;
 CollisionDetector cd;
 CollisionRes cr;
 
@@ -34,8 +34,9 @@ void keyPressed(){
   if(key == 'a'){
     Particle[] ps = new Particle[c.length+1];
     for(int i=0;i<c.length;i++)ps[i]=c[i];
-    ps[c.length] = new StillParticle();
+    ps[c.length] = new Particle();
     c = ps;
+    cd.reset(c);
   }
 }
 
@@ -43,7 +44,7 @@ void setup(){
   size(600,600);
   c = new Particle[numParticles];
   for(int i=0;i<numParticles;i++){
-    c[i] = new StillParticle();
+    c[i] = new Particle();
   }
   // change here the type of cd to use a different collision detect algorithm
   cd = new GridCollisionDetector(c,40);
