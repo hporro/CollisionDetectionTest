@@ -43,6 +43,7 @@ void keyPressed(){
     Particle[] ps = new Particle[c.length+1];
     for(int i=0;i<c.length;i++)ps[i]=c[i];
     ps[c.length] = new Particle();
+    //ps[c.length].r = random(20,40);
     c = ps;
     cd.reset(c);
   }
@@ -67,7 +68,7 @@ void setup(){
     c[i] = new Particle();
   }
   // change here the type of cd to use a different collision detect algorithm
-  cd = new GridCollisionDetector(c,20);
+  cd = new DelanuayCollisionDetector(c);
   //cd = new DelanuayCollisionDetector(c);
   // change here the type of cr to use a different collision resolution algorithm
   // for now there's only one algorithm implemented for collision resolution

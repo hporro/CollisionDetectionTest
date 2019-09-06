@@ -1,4 +1,4 @@
-class ParticleRandom extends Particle{
+class RandomParticle extends Particle{
   void move(){
     v.x += randomGaussian()/2;
     v.y += randomGaussian()/2;
@@ -6,7 +6,7 @@ class ParticleRandom extends Particle{
     v.x*=dampling;
     v.y*=dampling;
   }
-  ParticleRandom(){
+  RandomParticle(){
     super();
     dampling = 0.9;
   }
