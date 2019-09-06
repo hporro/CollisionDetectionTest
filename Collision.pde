@@ -162,6 +162,7 @@ class DelanuayCollisionDetector implements CollisionDetector{
     this.ms = new DelaunayMesh(p);
   }
   void update(){
+    //TODO CHANGE UPDATE MESH METHOD TO DELETE NEXT LINE AND STOP REBUILDING THE MESH AT EACH TIME STEP
     this.ms = new DelaunayMesh(p);
     ms.update();
   }

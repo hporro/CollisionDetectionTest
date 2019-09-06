@@ -40,7 +40,7 @@ class DelaunayMesh{
       someChanged = false;
       for(Half_Edge half_edge: half_edges){
         if(half_edge.twin == null) continue;
-        if((half_edge.opAngle() + half_edge.twin.opAngle()) < PI+0.0001) continue;
+        if((half_edge.opAngle() + half_edge.twin.opAngle()) < PI-0.0001) continue;
         half_edge.flip();
         count++;
         someChanged = true;
@@ -261,9 +261,9 @@ class Face{
     Edge ed2 = new Edge(p2,p3);
     Edge ed3 = new Edge(p3,p1);
 
-    boolean r1 = ed1.isRight(p);
-    boolean r2 = ed2.isRight(p);
-    boolean r3 = ed3.isRight(p);
+    boolean r1 = ed1.isRight(p);// || ed1.isOn(p);
+    boolean r2 = ed2.isRight(p);// || ed2.isOn(p);
+    boolean r3 = ed3.isRight(p);// || ed3.isOn(p);
 
     boolean res = false;
     if(r1 && r2 && r3) res = true;

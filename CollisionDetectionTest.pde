@@ -43,7 +43,6 @@ void keyPressed(){
     Particle[] ps = new Particle[c.length+1];
     for(int i=0;i<c.length;i++)ps[i]=c[i];
     ps[c.length] = new Particle();
-    //ps[c.length].r = random(20,40);
     c = ps;
     cd.reset(c);
   }

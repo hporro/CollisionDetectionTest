@@ -17,12 +17,12 @@ class StillParticle extends Particle{
   boolean collidesWith(Particle p){return false;}
   StillParticle(){
     super();
-    this.r = 5;
+    this.r = 0;
   }
   StillParticle(float x, float y){
     super(x,y);
     this.v = new PVector(0,0);
-    this.r = 10;
+    this.r = 0;
     this.m = 1;
   }
   void draw(){
