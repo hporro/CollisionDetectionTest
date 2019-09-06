@@ -153,3 +153,26 @@ class GridCollisionDetector implements CollisionDetector {
     }
   }
 }
+
+class DelanuayCollisionDetector implements CollisionDetector{
+  Particle[] p;
+  DelaunayMesh ms;
+  DelanuayCollisionDetector(Particle[] p){
+    this.p = p;
+    this.ms = new DelaunayMesh(p);
+  }
+  void update(){
+    this.ms = new DelaunayMesh(p);
+    ms.update();
+  }
+  Particle[][] detectCollisions(){
+    return ms.detectCollisions();
+  }
+  void reset(Particle[] p){
+    this.p = p;
+    this.ms = new DelaunayMesh(p);
+  }
+  void draw(){
+    ms.draw();
+  }
+}

@@ -21,7 +21,9 @@ class StillParticle extends Particle{
   }
   StillParticle(float x, float y){
     super(x,y);
+    this.v = new PVector(0,0);
     this.r = 10;
+    this.m = 1;
   }
   void draw(){
     circle(pos.x,pos.y,2*r);
@@ -60,7 +62,7 @@ class Particle{
     circle(pos.x,pos.y,2*r);
   }
   Particle(){
-    r = 20;
+    r = 10;
     pos.x = random(r,width-r);
     pos.y = random(r,height-r);
     v.x = random(1);
@@ -70,9 +72,9 @@ class Particle{
   Particle(float x, float y){
     pos.x = x;
     pos.y = y;
-    r = 20;
-    v.x = random(2);
-    v.y = random(2);
+    r = 10;
+    v.x = random(5);
+    v.y = random(5);
     m = 1;
   }
   boolean collidesWith(Particle p){

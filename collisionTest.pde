@@ -2,21 +2,29 @@ Particle c[];
 int numParticles = 10;
 CollisionDetector cd;
 CollisionRes cr;
+boolean pause = false;
 
 void draw(){
   background(0);
-  cr.resolveCollisions(cd.detectCollisions());
-  for(Particle p: c){
-    p.move();
+  
+  //collision handling
+  if(!pause){
+    cr.resolveCollisions(cd.detectCollisions());
+    for(Particle p: c){
+      p.move();
+    }
+    cd.update();
   }
-  cd.update();
+  
+  //drawing
   cd.draw();
   for(Particle p: c){
-      p.draw();
+    p.draw();
   }
+  
   if(keyPressed){
     if(key=='g'){
-      cd = new GridCollisionDetector(c,40);
+      cd = new GridCollisionDetector(c,20);
     }
     if(key=='s'){
       cd = new SimpleCollisionDetector(c);
@@ -38,6 +46,18 @@ void keyPressed(){
     c = ps;
     cd.reset(c);
   }
+  if(key == 'p'){
+    pause=!pause;
+  }
+  if(key == 'r'){
+    for(Particle p: c){
+      p.v.x = -p.v.x;
+      p.v.y = -p.v.y;
+    }
+  }
+  if(key == 'c'){
+    System.out.println(c.length);
+  }
 }
 
 void setup(){
@@ -47,7 +67,7 @@ void setup(){
     c[i] = new Particle();
   }
   // change here the type of cd to use a different collision detect algorithm
-  cd = new GridCollisionDetector(c,40);
+  cd = new GridCollisionDetector(c,20);
   //cd = new DelanuayCollisionDetector(c);
   // change here the type of cr to use a different collision resolution algorithm
   // for now there's only one algorithm implemented for collision resolution
