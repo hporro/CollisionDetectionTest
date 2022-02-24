@@ -1,11 +1,12 @@
 Particle c[];
-int numParticles = 10;
+int numParticles = 26*4;
 CollisionDetector cd;
 CollisionRes cr;
-boolean pause = false;
+boolean pause = true;
+
 
 void draw(){
-  background(0);
+  background(255);
   
   //collision handling
   if(!pause){
@@ -15,6 +16,10 @@ void draw(){
     }
     cd.update();
   }
+
+  fill(20,20,250,125);
+  stroke(20,20,250,125);
+  circle(c[60].pos.x,c[60].pos.y,100);
   
   //drawing
   cd.draw();
@@ -24,7 +29,7 @@ void draw(){
   
   if(keyPressed){
     if(key=='g'){
-      cd = new GridCollisionDetector(c,20);
+      cd = new GridCollisionDetector(c,100);
     }
     if(key=='s'){
       cd = new SimpleCollisionDetector(c);
@@ -36,6 +41,11 @@ void draw(){
       cd = new NullCollisionDetector();
     }
   }
+  
+  fill(20,20,250);
+  stroke(0);
+  circle(c[60].pos.x,c[60].pos.y,2*c[60].r);
+  
 }
 
 void keyPressed(){
@@ -62,10 +72,53 @@ void keyPressed(){
 
 void setup(){
   size(600,600);
-  c = new Particle[numParticles];
-  for(int i=0;i<numParticles;i++){
-    c[i] = new Particle();
+  c = new Particle[108];
+  int particleCount = 0;
+  
+  float rad = 4;
+  
+  float x_init = 130;
+  float y_init = 170;
+  
+  float dx = 16;
+  float dy = 16;
+  
+  // E
+  for(int i=0;i<10;i++){
+    c[particleCount] = new Particle(x_init + random(1),y_init + (rad+dy)*i, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + rad + dx, y_init + (rad+dy)*i, rad); particleCount++;
   }
+  for(int i=0;i<6;i++){
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init + rad+ dy, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init + 8*(rad+dy), rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init + 9*(rad+dy), rad); particleCount++;
+  }
+  for(int i=0;i<4;i++){
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init + 4*(rad+dy), rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+2)*(rad + dx),y_init + 5*(rad+dy), rad); particleCount++;
+  }
+  
+  // G
+  for(int i=0;i<10;i++){
+    c[particleCount] = new Particle(x_init + random(1) + 10*(rad + dx),y_init + (rad+dy)*i, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + 11*(rad + dx),y_init + (rad+dy)*i, rad); particleCount++;
+  }  
+  for(int i=0;i<6;i++){
+    c[particleCount] = new Particle(x_init + random(1) + (i+12)*(rad + dx),y_init, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+12)*(rad + dx),y_init + rad+ dy, rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+12)*(rad + dx),y_init + 8*(rad+dy), rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+12)*(rad + dx),y_init + 9*(rad+dy), rad); particleCount++;
+  }
+  for(int i=0;i<4;i++){
+    c[particleCount] = new Particle(x_init + random(1) + (i+14)*(rad + dx),y_init + 4*(rad+dy), rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+14)*(rad + dx),y_init + 5*(rad+dy), rad); particleCount++;
+  }
+  for(int i=0;i<2;i++){
+    c[particleCount] = new Particle(x_init + random(1) + (i+16)*(rad + dx),y_init + 6*(rad+dy), rad); particleCount++;
+    c[particleCount] = new Particle(x_init + random(1) + (i+16)*(rad + dx),y_init + 7*(rad+dy), rad); particleCount++;
+  }
+  
   // change here the type of cd to use a different collision detect algorithm
   cd = new DelanuayCollisionDetector(c);
   //cd = new DelanuayCollisionDetector(c);

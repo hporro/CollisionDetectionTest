@@ -3,7 +3,10 @@ class DelaunayMesh{
   ArrayList<Half_Edge> half_edges;
   void draw(){
     for(Half_Edge half_edge: half_edges){
-      stroke(100,100,100);
+      if(half_edge.ed.a.r == 0)continue;
+      if(half_edge.ed.b.r == 0)continue;      
+      stroke(100,100,100,100);
+      if((half_edge.length()<26))stroke(0);
       half_edge.draw();
     }
   }
@@ -12,6 +15,7 @@ class DelaunayMesh{
     for(Particle p: particles){
       addParticle(p);
     }
+    delonizate();
   }
   Particle[][] detectCollisions(){
     int numberOfCollisions = 0;
@@ -243,6 +247,9 @@ class Half_Edge{
     s3.next = this; s3.prev = s2; s3.face = f1;
     s4.next = s1; s4.prev = this.twin; s4.face = f2;
   }
+  float length(){
+    return ed.length();
+  }
 }
 
 class Face{
@@ -311,5 +318,8 @@ class Edge{
     float f = c.cross(new PVector(p.pos.x-a.pos.x,p.pos.y-a.pos.y)).z;
     if(f==0) return true;
     return false;
+  }
+  float length(){
+    return c.mag();
   }
 }

@@ -25,9 +25,7 @@ class StillParticle extends Particle{
     this.r = 0;
     this.m = 1;
   }
-  void draw(){
-    circle(pos.x,pos.y,2*r);
-  }
+  void draw(){}
 }
 
 class Particle{
@@ -59,6 +57,8 @@ class Particle{
     pos.y+=v.y;
   }
   void draw(){
+    fill(231,45,54);
+    stroke(221,35,44);
     circle(pos.x,pos.y,2*r);
   }
   Particle(){
@@ -73,6 +73,14 @@ class Particle{
     pos.x = x;
     pos.y = y;
     r = 10;
+    v.x = random(5);
+    v.y = random(5);
+    m = 1;
+  }
+  Particle(float x, float y, float rad){
+    pos.x = x;
+    pos.y = y;
+    r = rad;
     v.x = random(5);
     v.y = random(5);
     m = 1;
